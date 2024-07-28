@@ -1,7 +1,7 @@
-const TestService = require('./testService');
+const SubmissionService = require('./submissionService');
 const fastifyPlugin = require('fastify-plugin');
 async function servicePlugin(fastify, options) {
-    fastify.decorate('testService', new TestService());  // to add a new key value pair
+    fastify.decorate('submissionService', new SubmissionService(this.submissionRepository));
 }
 
 module.exports = fastifyPlugin(servicePlugin);
