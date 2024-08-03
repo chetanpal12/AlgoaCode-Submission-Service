@@ -7,8 +7,16 @@ class SubmissionRepository {
     }
 
     async createSubmission(submission) {
-        const response = await this.submissionModel.create(submission);
-        return response;
+        try {
+            // console.log("entering in the Repository");
+            const response = await this.submissionModel.create(submission);
+            // console.log("problem created in repository");
+            return response; 
+        } catch (error) {
+            console.log("error in repository",error);
+            throw error;
+        }
+        
     }
 }
 
