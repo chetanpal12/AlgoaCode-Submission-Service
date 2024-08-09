@@ -17,6 +17,7 @@ class SubmissionService {
         try {
             console.log("entering in the Service",submissionPayload);
             const problemId = submissionPayload.problemId;
+            const userId=submissionPayload.userId;
 
             const problemAdminApiResponse = await fetchProblemDetails(problemId);
             console.log('problem fetched successfully',problemAdminApiResponse.data.codeStubs);
@@ -28,8 +29,8 @@ class SubmissionService {
     
             console.log("language stub",languageCodeStub) 
     
-            submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + submissionPayload.code + "\n\n" + languageCodeStub.endSnippet;
-            // submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + languageCodeStub.userSnippet + "\n\n" + languageCodeStub.endSnippet;
+            // submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + submissionPayload.code + "\n\n" + languageCodeStub.endSnippet;
+            submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + languageCodeStub.userSnippet + "\n\n" + languageCodeStub.endSnippet;
             // return true;
             const submission = await this.submissionRepository.createSubmission(submissionPayload);
             if(!submission) {
@@ -44,6 +45,8 @@ class SubmissionService {
                     language: submission.language,
                     inputCase: problemAdminApiResponse.data.testCases[0].input,
                     outputCase: problemAdminApiResponse.data.testCases[0].output,
+                    userId,
+                    submissionId:submission._id
                 }
             });
             // console.log("Returning responce from service",responce);
