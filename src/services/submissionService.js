@@ -65,6 +65,17 @@ class SubmissionService {
         }
     }
 
+    
+    async updateSubmission(problemId,dataToUpadate){
+        try {
+            console.log("data from service for update",dataToUpadate,problemId)
+            const updatesubmission=await this.submissionRepository.updateSubmission(problemId,dataToUpadate);
+            return updatesubmission;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 
 module.exports = SubmissionService

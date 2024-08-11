@@ -1,4 +1,3 @@
-const { createSubmission } = require('../controllers/submissionController');
 const Submission = require('../models/submissionModel');
 
 class SubmissionRepository {
@@ -17,6 +16,20 @@ class SubmissionRepository {
             throw error;
         }
         
+    }
+
+    async updateSubmission(problemId,dataToupdate){
+        try {
+            console.log("problem id ",problemId);
+            const filter={_id:problemId};
+            const response=await this.submissionModel.findByIdAndUpdate(filter,dataToupdate,{new:true});
+            // console.log("responce from repositoryyyyy",response);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+       
     }
 }
 
