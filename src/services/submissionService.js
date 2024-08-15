@@ -29,8 +29,8 @@ class SubmissionService {
     
             console.log("language stub",languageCodeStub) 
     
-            // submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + submissionPayload.code + "\n\n" + languageCodeStub.endSnippet;
-            submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + languageCodeStub.userSnippet + "\n\n" + languageCodeStub.endSnippet;
+            submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + submissionPayload.code + "\n\n" + languageCodeStub.endSnippet;
+            // submissionPayload.code = languageCodeStub.startSnippet + "\n\n" + languageCodeStub.userSnippet + "\n\n" + languageCodeStub.endSnippet;
             // return true;
             const submission = await this.submissionRepository.createSubmission(submissionPayload);
             if(!submission) {
